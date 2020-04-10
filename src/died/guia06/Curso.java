@@ -31,7 +31,6 @@ public class Curso {
 		this.log = new Registro();
 	}
 	
-
 	/**
 	 * Este método, verifica si el alumno se puede inscribir y si es así lo agrega al curso,
 	 * agrega el curso a la lista de cursos en los que está inscripto el alumno y retorna verdadero.
@@ -46,17 +45,30 @@ public class Curso {
 	 * @return
 	 */
 	public Boolean inscribir(Alumno a) {
+		try {
 		log.registrar(this, "inscribir ",a.toString());
 		return false;
-	}
+		}
+		catch(IOException e) {
+			System.out.println("Hubo un problema: "+e.getMessage());
+			e.printStackTrace();
+		}
+		}
 	
 	
 	/**
 	 * imprime los inscriptos en orden alfabetico
 	 */
 	public void imprimirInscriptos() {
+		try {
 		log.registrar(this, "imprimir listado",this.inscriptos.size()+ " registros ");
+		}
+		catch(IOException e) {
+			System.out.println("Hubo un problema: "+e.getMessage());
+			e.printStackTrace();
+		}
 	}
-
-
 }
+
+
+
