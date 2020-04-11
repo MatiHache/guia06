@@ -5,7 +5,7 @@ import java.util.List;
 import org.junit.platform.commons.util.StringUtils;
 
 
-public class Alumno implements Comparator<Alumno>{
+public class Alumno implements Comparable<Alumno>{
 
 	private String nombre;
 	private Integer nroLibreta;
@@ -27,7 +27,7 @@ public class Alumno implements Comparator<Alumno>{
 		this.aprobados = aprobados;
 	}
 
-	public StringUtilsing getNombre() {
+	public String getNombre() {
 		return nombre;
 	}
 
@@ -44,15 +44,21 @@ public class Alumno implements Comparator<Alumno>{
 	}
 	
 	public int creditosObtenidos() {
-		return 1;
+		int creditos = 0;
+		
+		for(Curso unCurso: this.aprobados) {
+			creditos += unCurso.getCreditos();
+		}
+		
+		return creditos;
 	}
 
 	public void aprobar(Curso c) {
-		//
+		this.cursando.remove(c);
 	}
 
 	public void inscripcionAceptada(Curso c) {
-		//
+		this.cursando.add(c);
 	}
 	
 	@Override
@@ -62,9 +68,8 @@ public class Alumno implements Comparator<Alumno>{
 	}
 	
 	@Override
-	public int compare(Alumno a1, Alumno a2) {
-		a1 = this;		
-		return a1.getNombre().compareTo(a2.getNombre());
+	public int compareTo(Alumno a) {
+		return this.getNombre() - a.getNombre();
 	}
 
 }

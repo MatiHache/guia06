@@ -3,6 +3,8 @@ package died.guia06;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.junit.jupiter.api.TestInstance.Lifecycle;
+
 import died.guia06.util.Registro;
 
 /**
@@ -31,6 +33,22 @@ public class Curso {
 		this.log = new Registro();
 	}
 	
+	
+	public Integer getCupo() {
+		return cupo;
+	}
+
+
+	public Integer getCreditos() {
+		return creditos;
+	}
+
+
+	public Integer getCreditosRequeridos() {
+		return creditosRequeridos;
+	}
+
+
 	/**
 	 * Este método, verifica si el alumno se puede inscribir y si es así lo agrega al curso,
 	 * agrega el curso a la lista de cursos en los que está inscripto el alumno y retorna verdadero.
@@ -46,8 +64,14 @@ public class Curso {
 	 */
 	public Boolean inscribir(Alumno a) {
 		try {
+		if(a.creditosObtenidos()>=this.creditosRequeridos &&
+						 this.inscriptos.size()<this.cupo &&
+						 a.getCursando().size()<3) {
+		a.inscripcionAceptada(this);
 		log.registrar(this, "inscribir ",a.toString());
-		return false;
+		return true;
+		}
+		else return false;
 		}
 		catch(IOException e) {
 			System.out.println("Hubo un problema: "+e.getMessage());
@@ -61,7 +85,9 @@ public class Curso {
 	 */
 	public void imprimirInscriptos() {
 		try {
+			Collections.sort(this.inscriptos);			
 		log.registrar(this, "imprimir listado",this.inscriptos.size()+ " registros ");
+		System.out.println(this.inscriptos);
 		}
 		catch(IOException e) {
 			System.out.println("Hubo un problema: "+e.getMessage());
