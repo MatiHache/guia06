@@ -1,7 +1,9 @@
 package died.guia06;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Collections;
 
 import org.junit.jupiter.api.TestInstance.Lifecycle;
 
@@ -48,6 +50,25 @@ public class Curso {
 		return creditosRequeridos;
 	}
 
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+
+
+	public void setCupo(Integer cupo) {
+		this.cupo = cupo;
+	}
+
+
+	public void setCreditos(Integer creditos) {
+		this.creditos = creditos;
+	}
+
+
+	public void setCreditosRequeridos(Integer creditosRequeridos) {
+		this.creditosRequeridos = creditosRequeridos;
+	}
+
 
 	/**
 	 * Este método, verifica si el alumno se puede inscribir y si es así lo agrega al curso,
@@ -63,6 +84,7 @@ public class Curso {
 	 * @return
 	 */
 	public Boolean inscribir(Alumno a) {
+		boolean retorno = false;
 		try {
 		if(a.creditosObtenidos()>=this.creditosRequeridos &&
 						 this.inscriptos.size()<this.cupo &&
@@ -71,13 +93,14 @@ public class Curso {
 		log.registrar(this, "inscribir ",a.toString());
 		return true;
 		}
-		else return false;
 		}
 		catch(IOException e) {
 			System.out.println("Hubo un problema: "+e.getMessage());
 			e.printStackTrace();
 		}
-		}
+		return retorno;
+	}
+
 	
 	
 	/**
@@ -85,7 +108,7 @@ public class Curso {
 	 */
 	public void imprimirInscriptos() {
 		try {
-			Collections.sort(this.inscriptos);			
+			 Collections.sort(this.inscriptos);			
 		log.registrar(this, "imprimir listado",this.inscriptos.size()+ " registros ");
 		System.out.println(this.inscriptos);
 		}

@@ -1,6 +1,7 @@
 package died.guia06;
 
 import java.util.List;
+import java.util.ArrayList;
 
 import org.junit.platform.commons.util.StringUtils;
 
@@ -12,11 +13,15 @@ public class Alumno implements Comparable<Alumno>{
 	private List<Curso> cursando;
 	private List<Curso> aprobados;
 	
-	public Alumno() {}
+	public Alumno() {
+		super();
+	}
 	
 	public Alumno(String nombre, Integer nroLibreta) {
 		this.nombre = nombre;
 		this.nroLibreta = nroLibreta;
+		this.cursando = new ArrayList<Curso>();
+		this.aprobados = new ArrayList<Curso>();
 	}
 
 	public void setCursando(List<Curso> cursando) {
@@ -44,17 +49,18 @@ public class Alumno implements Comparable<Alumno>{
 	}
 	
 	public int creditosObtenidos() {
-		int creditos = 0;
-		
+
+		Integer creditos = 0;
 		for(Curso unCurso: this.aprobados) {
 			creditos += unCurso.getCreditos();
 		}
 		
 		return creditos;
-	}
+		}
 
 	public void aprobar(Curso c) {
 		this.cursando.remove(c);
+		this.aprobados.add(c);
 	}
 
 	public void inscripcionAceptada(Curso c) {
@@ -62,14 +68,15 @@ public class Alumno implements Comparable<Alumno>{
 	}
 	
 	@Override
-	public boolean equals(Alumno a) {
-		if(this.nroLibreta == (Alumno) a.nroLibreta) return true;
+	public boolean equals(Object a) {
+		Alumno al = (Alumno) a;
+		if(this.nroLibreta ==  al.nroLibreta) return true;
 		else return false;
 	}
 	
 	@Override
 	public int compareTo(Alumno a) {
-		return this.getNombre() - a.getNombre();
+		return this.getNombre().compareTo(a.getNombre());
 	}
 
 }
