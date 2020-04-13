@@ -35,7 +35,7 @@ public class Curso {
 		this.log = new Registro();
 	}
 	
-	
+	//Getters y setters
 	public Integer getCupo() {
 		return cupo;
 	}

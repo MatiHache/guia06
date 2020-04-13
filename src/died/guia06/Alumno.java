@@ -50,7 +50,7 @@ public class Alumno implements Comparable<Alumno>{
 	
 	public int creditosObtenidos() {
 
-		Integer creditos = 0;
+		int creditos = 0;
 		for(Curso unCurso: this.aprobados) {
 			creditos += unCurso.getCreditos();
 		}
