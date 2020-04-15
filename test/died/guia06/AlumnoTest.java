@@ -7,6 +7,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import java.util.List;
 import java.util.ArrayList;
+import org.junit.Assert;
 
 public class AlumnoTest {
 
@@ -33,7 +34,8 @@ public class AlumnoTest {
 	@After
 	public void tearDown() {
 	}
-	
+	 
+	//Test de método: CreditosObtenido()
 	@Test 
 	public void testCreditosObtenidos() {
 		a1.aprobar(c1);
@@ -41,7 +43,8 @@ public class AlumnoTest {
 		int Creditos = a1.creditosObtenidos();
 		assertEquals(14,Creditos);
 	}
-
+	
+	//Test de método: Aprobar()
 	@Test
 	void testAprobar() {
 		a1.aprobar(c1);
@@ -49,19 +52,16 @@ public class AlumnoTest {
 		List<Curso> prueba = new ArrayList<>();
 		prueba.add(c1);
 		prueba.add(c2);
-		for(int i=0; i<a1.getAprobados().size(); i++) {
-			assertEquals(prueba.get(i),a1.getAprobados().get(i));
-		}
+		assertEquals(prueba, a1.getAprobados());
 	}
-
+	
+	//Test de método: InscripcionAceptada()
 	@Test
 	void testInscripcionAceptada() {
 		List<Curso> prueba = new ArrayList<>();
 		prueba.add(c1);
 		prueba.add(c2);
-		for(int i=0; i<a1.getCursando().size(); i++) {
-			assertEquals(prueba.get(i),a1.getCursando().get(i));
-		}
+		assertEquals(prueba, a1.getCursando());
 	}
 
 }

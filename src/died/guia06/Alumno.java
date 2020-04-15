@@ -15,6 +15,8 @@ public class Alumno implements Comparable<Alumno>{
 	
 	public Alumno() {
 		super();
+		this.cursando = new ArrayList<Curso>();
+		this.aprobados = new ArrayList<Curso>();
 	}
 	
 	public Alumno(String nombre, Integer nroLibreta) {
@@ -23,7 +25,7 @@ public class Alumno implements Comparable<Alumno>{
 		this.cursando = new ArrayList<Curso>();
 		this.aprobados = new ArrayList<Curso>();
 	}
-
+//Getters y Setters
 	public void setCursando(List<Curso> cursando) {
 		this.cursando = cursando;
 	}
@@ -48,19 +50,23 @@ public class Alumno implements Comparable<Alumno>{
 		return aprobados;
 	}
 	
+	//Metodos de Negocio
+	
 	public int creditosObtenidos() {
-
 		int creditos = 0;
 		for(Curso unCurso: this.aprobados) {
 			creditos += unCurso.getCreditos();
 		}
 		
 		return creditos;
-		}
+	
+	}
 
 	public void aprobar(Curso c) {
+		if(this.cursando.contains(c)) {
 		this.cursando.remove(c);
 		this.aprobados.add(c);
+		}
 	}
 
 	public void inscripcionAceptada(Curso c) {
@@ -79,4 +85,9 @@ public class Alumno implements Comparable<Alumno>{
 		return this.getNombre().compareTo(a.getNombre());
 	}
 
+	//Otros métodos
+	@Override
+	public String toString() {
+		return "Alumno: "+this.nombre+" Libreta: "+this.nroLibreta+" Créditos: "+this.creditosObtenidos();
+	}
 }

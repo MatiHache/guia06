@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Collections;
+import java.util.Comparator;
 
 import org.junit.jupiter.api.TestInstance.Lifecycle;
 
@@ -26,16 +27,26 @@ public class Curso {
 	private List<Alumno> inscriptos;
 	private Integer creditos;
 	private Integer creditosRequeridos;
-	
 	private Registro log;
 	
 	public Curso() {
 		super();
+	}
+	
+	public Curso(int id, String nombre, int cicloLectivo) {
+		super();
+		this.id = id;
+		this.cicloLectivo = cicloLectivo;
+		this.nombre = nombre;
 		this.inscriptos = new ArrayList<Alumno>();
 		this.log = new Registro();
 	}
 	
 	//Getters y setters
+	public String getNombre() {
+	return nombre;	
+	}
+	
 	public Integer getCupo() {
 		return cupo;
 	}
@@ -45,6 +56,9 @@ public class Curso {
 		return creditos;
 	}
 
+	public List<Alumno> getInscriptos() {
+		return inscriptos;
+	}	
 
 	public Integer getCreditosRequeridos() {
 		return creditosRequeridos;
@@ -88,8 +102,10 @@ public class Curso {
 		try {
 		if(a.creditosObtenidos()>=this.creditosRequeridos &&
 						 this.inscriptos.size()<this.cupo &&
-						 a.getCursando().size()<3) {
+						 a.getCursando().size()<3 &&
+						 !(this.inscriptos.contains(a))) {
 		a.inscripcionAceptada(this);
+		this.inscriptos.add(a);
 		log.registrar(this, "inscribir ",a.toString());
 		return true;
 		}
@@ -109,6 +125,18 @@ public class Curso {
 	public void imprimirInscriptos() {
 		try {
 			 Collections.sort(this.inscriptos);			
+		log.registrar(this, "imprimir listado",this.inscriptos.size()+ " registros ");
+		System.out.println(this.inscriptos);
+		}
+		catch(IOException e) {
+			System.out.println("Hubo un problema: "+e.getMessage());
+			e.printStackTrace();
+		}
+	}
+	
+	public void imprimirInscriptos(Comparator<Alumno> c) {
+		try {
+			 Collections.sort(this.inscriptos, c);			
 		log.registrar(this, "imprimir listado",this.inscriptos.size()+ " registros ");
 		System.out.println(this.inscriptos);
 		}
