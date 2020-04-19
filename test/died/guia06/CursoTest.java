@@ -1,12 +1,17 @@
 package died.guia06;
 
 import static org.junit.jupiter.api.Assertions.*;
+
+
+import java.lang.Exception;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-
+import org.junit.Assert;
 import org.junit.After;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.Assertions;
 
 class CursoTest {
 	private Alumno puedeInscribir;
@@ -39,7 +44,6 @@ class CursoTest {
 			}
 		};
 		 	
-	
 	}
 
 	@After
@@ -48,26 +52,25 @@ class CursoTest {
 
 	@Test
 	void testPuedeInscribir() {
-		assertTrue(c1.inscribir(puedeInscribir));
 		
+	assertDoesNotThrow(() -> c1.inscribir(puedeInscribir));
+
 	}
 	
 	@Test
 	void testNoPuedeInscribir() {
-		assertFalse(c1.inscribir(noPuedeInscribir));
-		
+	assertThrows(ExcepcionCreditos.class,() -> c1.inscribir(noPuedeInscribir));
 	}
 
 	@Test
 	void testImprimirInscriptos() {
 		List<Alumno> inscriptosTest = new ArrayList<>();
-		c1.inscribir(puedeInscribir);
-		c1.inscribir(puedeInscribir2);
+		assertDoesNotThrow(()->c1.inscribir(puedeInscribir));
+		assertDoesNotThrow(()->c1.inscribir(puedeInscribir2));
 		inscriptosTest.add(puedeInscribir2);
 		inscriptosTest.add(puedeInscribir);
 		c1.imprimirInscriptos();
 		assertEquals(c1.getInscriptos(), inscriptosTest);
-		
 	}
 
 }

@@ -72,20 +72,20 @@ public class Alumno implements Comparable<Alumno>{
 	public void inscripcionAceptada(Curso c) {
 		this.cursando.add(c);
 	}
-	
+	//Sobreescribe equals
 	@Override
 	public boolean equals(Object a) {
 		Alumno al = (Alumno) a;
 		if(this.nroLibreta ==  al.nroLibreta) return true;
 		else return false;
 	}
-	
+	//Sobreescribe compareTo
 	@Override
 	public int compareTo(Alumno a) {
 		return this.getNombre().compareTo(a.getNombre());
 	}
 
-	//Otros métodos
+	//Sobreescribe toString
 	@Override
 	public String toString() {
 		return "Alumno: "+this.nombre+" Libreta: "+this.nroLibreta+" Créditos: "+this.creditosObtenidos();

@@ -1,15 +1,15 @@
 package died.guia06;
 
 import static org.junit.jupiter.api.Assertions.*;
-
 import org.junit.After;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import java.util.List;
+import java.io.IOException;
 import java.util.ArrayList;
 import org.junit.Assert;
 
-public class AlumnoTest {
+class AlumnoTest {
 
 	private Alumno a1;
 	private Curso c1;
@@ -28,13 +28,15 @@ public class AlumnoTest {
 		c2.setCreditosRequeridos(0);
 		c1.setCupo(20);
 		c2.setCupo(20);
-		c1.inscribir(a1);
-		c2.inscribir(a1);
+		assertDoesNotThrow(() -> c1.inscribir(a1));
+		assertDoesNotThrow(() -> c2.inscribir(a1));
+		
 	}
 	@After
 	public void tearDown() {
 	}
 	 
+	
 	//Test de método: CreditosObtenido()
 	@Test 
 	public void testCreditosObtenidos() {

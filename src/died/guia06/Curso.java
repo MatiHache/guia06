@@ -1,6 +1,9 @@
 package died.guia06;
 
 import java.io.IOException;
+
+import java.lang.Exception;
+import java.lang.RuntimeException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Collections;
@@ -31,6 +34,7 @@ public class Curso {
 	
 	public Curso() {
 		super();
+		this.inscriptos = new ArrayList<Alumno>();
 	}
 	
 	public Curso(int id, String nombre, int cicloLectivo) {
@@ -97,26 +101,31 @@ public class Curso {
 	 * @param a
 	 * @return
 	 */
-	public Boolean inscribir(Alumno a) {
-		boolean retorno = false;
-		try {
-		if(a.creditosObtenidos()>=this.creditosRequeridos &&
-						 this.inscriptos.size()<this.cupo &&
-						 a.getCursando().size()<3 &&
-						 !(this.inscriptos.contains(a))) {
+			
+	public void inscribir(Alumno a) throws ExcepcionCreditos, ExcepcionCupo,
+									ExcepcionCursando, ExcepcionInscripto, 
+									ExcepcionRegistroAuditoria{
+		try{
+			if(a.creditosObtenidos() < this.creditosRequeridos)
+			throw new ExcepcionCreditos();
+		else if(this.inscriptos.size()==this.cupo)
+			throw new ExcepcionCupo();
+		else if(a.getCursando().size() == 3) 
+			throw new ExcepcionCursando();
+		else if(this.inscriptos.contains(a))
+			throw new ExcepcionInscripto();
+		else {
 		a.inscripcionAceptada(this);
 		this.inscriptos.add(a);
-		log.registrar(this, "inscribir ",a.toString());
-		return true;
+		log.registrar(this,"inscribir ",a.toString());
 		}
-		}
+	}	
 		catch(IOException e) {
-			System.out.println("Hubo un problema: "+e.getMessage());
-			e.printStackTrace();
+			throw new ExcepcionRegistroAuditoria(e.getMessage());
+			
 		}
-		return retorno;
+		
 	}
-
 	
 	
 	/**
@@ -133,7 +142,7 @@ public class Curso {
 			e.printStackTrace();
 		}
 	}
-	
+	//Imprime los inscriptos en el orden especificado en C
 	public void imprimirInscriptos(Comparator<Alumno> c) {
 		try {
 			 Collections.sort(this.inscriptos, c);			
