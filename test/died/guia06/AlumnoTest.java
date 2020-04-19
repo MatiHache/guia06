@@ -5,9 +5,7 @@ import org.junit.After;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import java.util.List;
-import java.io.IOException;
 import java.util.ArrayList;
-import org.junit.Assert;
 
 class AlumnoTest {
 
@@ -19,6 +17,7 @@ class AlumnoTest {
 	
 	@BeforeEach
 	public void setUp() {
+		
 		a1 = new Alumno("Matías Hillar",25315);
 		c1 = new Curso();
 		c2 = new Curso();

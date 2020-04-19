@@ -3,8 +3,6 @@ package died.guia06;
 import java.util.List;
 import java.util.ArrayList;
 
-import org.junit.platform.commons.util.StringUtils;
-
 
 public class Alumno implements Comparable<Alumno>{
 

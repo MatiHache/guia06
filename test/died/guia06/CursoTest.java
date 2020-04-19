@@ -3,15 +3,14 @@ package died.guia06;
 import static org.junit.jupiter.api.Assertions.*;
 
 
-import java.lang.Exception;
-import java.io.IOException;
+
 import java.util.ArrayList;
 import java.util.List;
-import org.junit.Assert;
 import org.junit.After;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.Assertions;
+
+
 
 class CursoTest {
 	private Alumno puedeInscribir;
@@ -52,9 +51,7 @@ class CursoTest {
 
 	@Test
 	void testPuedeInscribir() {
-		
 	assertDoesNotThrow(() -> c1.inscribir(puedeInscribir));
-
 	}
 	
 	@Test

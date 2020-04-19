@@ -35,6 +35,7 @@ public class Curso {
 	public Curso() {
 		super();
 		this.inscriptos = new ArrayList<Alumno>();
+		this.log = new Registro();
 	}
 	
 	public Curso(int id, String nombre, int cicloLectivo) {

@@ -1,7 +1,5 @@
 package died.guia06;
 
-import java.io.IOException;
-import junit.runner.Version;
 
 public class App {
 
